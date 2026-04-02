@@ -1,5 +1,11 @@
+import AuthPage from "./pages/AuthPage";
+
 const App = () => {
-  return <h1>Тест</h1>;
+  return (
+    <div>
+      <AuthPage />
+    </div>
+  );
 };
 
 export default App;
