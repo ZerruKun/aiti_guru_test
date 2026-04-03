@@ -13,7 +13,7 @@ const Product = () => {
           />
           <span className={styles.checkboxCustom}></span>
         </label>
-        <span className={styles.greySquere}></span>
+        <span className={styles.greySquare}></span>
         <div className={styles.commodity}>
           <span className={styles.name}>Название</span>
           <span className={styles.category}>Категория</span>
