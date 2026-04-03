@@ -145,55 +145,55 @@
 }
 
 .checkboxInput {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
 }
 
 .checkboxLabel {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 16px;
-  color: #9C9C9C;
-  cursor: pointer;
-  user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    color: #9C9C9C;
+    cursor: pointer;
+    user-select: none;
 }
 
 .checkboxCustom {
-  width: 20px;
-  height: 20px;
-  border: 1px solid #E0E0E0;
-  border-radius: 4px;
-  background-color: #FFF;
-  flex-shrink: 0;
-  position: relative;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
+    background-color: #FFF;
+    flex-shrink: 0;
+    position: relative;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .checkboxLabel:hover .checkboxCustom {
-  border-color: #BBB;
+   border-color: #BBB;
 }
 
 .checkboxInput:checked + .checkboxLabel .checkboxCustom {
-  background-color: #242EDB;
-  border-color: #242EDB;
+    background-color: #242EDB;
+    border-color: #242EDB;
 }
 
 .checkboxInput:checked + .checkboxLabel .checkboxCustom::after {
-  content: '✓';
-  color: #FFF;
-  font-size: 12px;
-  font-weight: bold;
+    content: '✓';
+    color: #FFF;
+    font-size: 12px;
+    font-weight: bold;
 }
 
 .checkboxInput:focus + .checkboxLabel .checkboxCustom {
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
 
 .form button {
@@ -258,15 +258,15 @@
 
 /* Текст смотриться некрасиво. Добавлено для адаптации */
 @media (max-width: 476px) {
-  .hello {
-    text-align: center;
-  }
+    .hello {
+      text-align: center;
+    }
   
-  .bottomHello {
-    text-align: center;
-  }
+    .bottomHello {
+      text-align: center;
+    }
   
-  .general {
-    padding: 24px;
-  }
+    .general {
+      padding: 24px;
+    }
 }

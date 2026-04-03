@@ -1,0 +1,177 @@
+@font-face {
+    font-family: 'Inter';
+    src: url('../fonts/Inter_18pt-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../fonts/Inter_18pt-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../fonts/Inter_18pt-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+.general {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1600px;
+    padding: 18px;
+    border-top: 1px solid #B2B3B9;
+    border-bottom: 1px solid #B2B3B9;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.product {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.checkbox {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.checkboxInput {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkboxCustom {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
+    background-color: #FFF;
+    flex-shrink: 0;
+    position: relative;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.checkboxInput:checked + .checkboxCustom {
+    background-color: #242EDB;
+    border-color: #242EDB;
+}
+
+.checkboxInput:hover + .checkboxCustom{
+    border-color: #B2B3B9;
+}
+
+.checkboxInput:checked + .checkboxCustom::after {
+    content: '✓';
+    color: #FFF;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.checkboxInput:focus + .checkboxCustom {
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.greySquere {
+    width: 48px;
+    height: 48px;
+    background-color: #C4C4C4;
+    border-radius: 8px;
+    margin: 0 18px;
+}
+
+.commodity {
+    display: flex;
+    flex-direction: column;
+}
+
+.name, .vendor {
+    font-family: 'Inter', Roboto, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.category {
+    font-family: 'Inter', Roboto, sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: #B2B3B9;
+}
+
+.article, .rating, .price {
+    font-family: 'Inter', Roboto, sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+.plusButton {
+    width: 44px;
+    height: 22px;
+    padding: 0 0 3px 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0.85;
+    font-family: 'Inter', Roboto, sans-serif;
+    font-size: 28px;
+    font-weight: 300;
+    border-radius: 16px;
+    color: #FFF;
+    background-color: #242EDB;
+    border: none;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.plusButton:hover {
+    background-color: #111672
+}
+
+.dotesButton {
+    width: 22px;
+    height: 22px;
+    padding: 0 2px 17px 0;
+    margin: 0 0 0 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0.85;
+    font-family: 'Inter', Roboto, sans-serif;
+    font-size: 28px;
+    font-weight: 300;
+    letter-spacing: -2.5px;
+    color:#B2B3B9;
+    border: 1px solid #B2B3B9;
+    border-radius: 500%;
+
+}
+
+.dotesButton:hover {
+    color: #FFF;
+    border: #FFF;
+    background-color: #B2B3B9;
+}

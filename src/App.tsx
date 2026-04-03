@@ -1,9 +1,9 @@
-import AuthPage from "./pages/AuthPage";
+import Product from "./components/Product";
 
 const App = () => {
   return (
     <div>
-      <AuthPage />
+      <Product />
     </div>
   );
 };
