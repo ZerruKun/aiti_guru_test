@@ -17,7 +17,7 @@
     justify-content: space-between;
     align-items: center;
     /* Временно */
-    max-width: 986px;
+    max-width: 980px;
 }
 
 .goods {
@@ -57,7 +57,6 @@
     border-radius: 8px;
     border-color: #242EDB;
 }
-
 
 .searchIcon {
     position: absolute;

@@ -154,6 +154,7 @@
     border-radius: 16px;
     color: #FFF;
     background-color: #242EDB;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     border: none;
     cursor: pointer;
     -webkit-appearance: none;
@@ -163,6 +164,11 @@
 
 .plusButton:hover {
     background-color: #111672
+}
+
+.plusButton:active {
+    transform: translateY(1px);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
 }
 
 .dotesButton {

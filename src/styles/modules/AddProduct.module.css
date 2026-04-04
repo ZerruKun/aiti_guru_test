@@ -1,0 +1,78 @@
+@font-face {
+    font-family: 'Inter';
+    src: url('../fonts/Inter_18pt-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../fonts/Inter_18pt-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+.general {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Временно */
+    max-width: 980px;
+}
+
+.allPositions {
+    font-family: 'Inter', Roboto, sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+}
+
+.refreshButton {
+    width: 42px;
+    height: 42px;
+    background-image: url(../images/arrows_pic.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 8px;
+    border: 1px solid #ECECEB;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.refreshButton:hover {
+    background-color: #ECECEB;
+}
+
+.refreshButton:active {
+    transform: translateY(1px);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+}
+
+.addButton {
+    font-family: 'Inter', Roboto, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    width: 147px;
+    height: 42px;
+    margin-left: 8px;
+    padding-left: 40px;
+    background-image: url(../images/plus_pic.svg);
+    background-repeat: no-repeat;
+    background-position: 20px;
+    border-radius: 8px;
+    color: #EBF3EA;
+    background-color: #242EDB;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.addButton:hover {
+    background-color: #111672;
+}
+
+.addButton:active {
+    transform: translateY(1px);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+}
