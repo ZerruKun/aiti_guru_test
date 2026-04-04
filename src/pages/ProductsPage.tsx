@@ -1,5 +1,11 @@
+import ProductsList from "../components/ProductsList";
+
 const ProductsPage = () => {
-  return <div></div>;
+  return (
+    <div>
+      <ProductsList />
+    </div>
+  );
 };
 
 export default ProductsPage;

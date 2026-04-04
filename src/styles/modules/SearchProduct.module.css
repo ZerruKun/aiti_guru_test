@@ -1,0 +1,68 @@
+@font-face {
+    font-family: 'Inter';
+    src: url('../fonts/Inter_18pt-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../fonts/Inter_18pt-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+.general {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Временно */
+    max-width: 986px;
+}
+
+.goods {
+    font-family: 'Inter', Roboto, sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.search {
+    position: relative;
+    width: 100%;
+    margin-left: 300px;
+}
+
+.searchInput {
+    font-family: 'Inter', Roboto, sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    height: 46px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px 20px 20px 50px;
+    border: 1px solid #F3F3F3;
+    border-radius: 8px;
+    background-color: #F3F3F3;
+    color: #999999;
+    transition: all 0.2s;
+}
+
+.searchInput:hover {
+    border-radius: 8px;
+    border-color: #BBB;
+}
+
+.searchInput:focus {
+    border-radius: 8px;
+    border-color: #242EDB;
+}
+
+
+.searchIcon {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    width: 24px;
+    height: 24px;
+}

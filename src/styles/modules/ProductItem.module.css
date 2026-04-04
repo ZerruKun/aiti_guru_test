@@ -20,21 +20,21 @@
 }
 
 .general {
-  display: grid;
-  grid-template-columns: 
-    320px
-    180px
-    150px
-    100px
-    120px
-    80px;
-  align-items: center;
-  width: fit-content;
-  padding: 18px;
-  border-top: 1px solid #B2B3B9;
-  border-bottom: 1px solid #B2B3B9;
-  user-select: none;
-  -webkit-user-select: none;
+    display: grid;
+    grid-template-columns: 
+      320px
+      180px
+      150px
+      100px
+      120px
+      80px;
+    align-items: center;
+    width: fit-content;
+    padding: 18px;
+    border-top: 1px solid #B2B3B9;
+    border-bottom: 1px solid #B2B3B9;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 .product {
@@ -131,7 +131,7 @@
 .article,
 .rating,
 .price {
-  padding-left: 8px;
+    padding-left: 8px;
 }
 
 .buttons {

@@ -1,6 +1,6 @@
-import styles from "../styles/modules/Product.module.css";
+import styles from "../styles/modules/ProductItem.module.css";
 
-const Product = () => {
+const ProductItem = () => {
   return (
     <div className={styles.general}>
       <div className={styles.product}>
@@ -31,4 +31,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default ProductItem;

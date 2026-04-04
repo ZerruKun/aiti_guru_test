@@ -1,4 +1,4 @@
-import Product from "./Product";
+import ProductItem from "./ProductItem";
 import styles from "../styles/modules/ProductsList.module.css";
 
 const ProductsList = () => {
@@ -13,7 +13,9 @@ const ProductsList = () => {
         <span></span>
       </div>
       <div>
-        <Product />
+        <ProductItem />
+        <ProductItem />
+        <ProductItem />
       </div>
     </div>
   );

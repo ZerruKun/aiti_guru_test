@@ -1,9 +1,11 @@
-import ProductsList from "./components/ProductsList";
+import SearchProduct from "./components/SearchProduct";
+import ProductsPage from "./pages/ProductsPage";
 
 const App = () => {
   return (
     <div>
-      <ProductsList />
+      <SearchProduct />
+      <ProductsPage />
     </div>
   );
 };
