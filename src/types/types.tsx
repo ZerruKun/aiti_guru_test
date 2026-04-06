@@ -1,18 +1,43 @@
-export interface IUser {
-    login: string;
-    password: string;
-    isSaving: boolean;
-}
-
 export interface IProduct {
-    name: string
-    category: string
-    vendor: string
-    article: string
-    rating: number
-    price: number
+  name: string;
+  category: string;
+  vendor: string;
+  article: string;
+  rating: number;
+  price: number;
 }
 
 export interface IProductsList {
-    products: IProduct[]
+  products: IProduct[];
+}
+
+export interface IAuthErrors {
+  login?: string;
+  password?: string;
+  general?: string;
+}
+
+export interface ILoginCredentials {
+  username: string;
+  password: string;
+  expiresInMins?: number;
+}
+
+// Поля от DummyJSON
+export interface IUser {
+  id: number;
+  username: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  gender: string;
+  image: string;
+  token: string;
+}
+
+export interface IAuthFormState {
+  login: string;
+  password: string;
+  remember: boolean;
+  loading: boolean;
 }
