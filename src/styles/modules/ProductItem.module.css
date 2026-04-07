@@ -22,11 +22,11 @@
 .general {
     display: grid;
     grid-template-columns: 
-      minmax(280px, 1fr)
-      minmax(140px, 180px)
-      minmax(120px, 150px)
-      minmax(80px, 100px)
-      minmax(100px, 120px)
+      minmax(280px, 2fr)
+      minmax(140px, 1.5fr)
+      minmax(120px, 1.2fr)
+      minmax(80px, 0.8fr)
+      minmax(100px, 1fr)
       80px;
     align-items: center;
     width: 100%;
@@ -134,6 +134,16 @@
 .rating,
 .price {
     padding-left: 8px;
+}
+
+/* Стили для картинки, но пока не ясно нужно ли */
+.thumbnail {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  object-fit: cover;
+  margin: 0 18px;
+  flex-shrink: 0;
 }
 
 .buttons {

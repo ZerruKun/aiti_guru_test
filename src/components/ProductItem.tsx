@@ -1,28 +1,40 @@
+import type { IProductItemProps } from "../types/types";
 import styles from "../styles/modules/ProductItem.module.css";
 
-const ProductItem = () => {
+const ProductItem = ({ product }: IProductItemProps) => {
   return (
     <div className={styles.general}>
       <div className={styles.product}>
-        <label className={styles.checkbox} htmlFor="check">
+        <label className={styles.checkbox} htmlFor={`check-${product.id}`}>
           <input
             type="checkbox"
-            id="check"
+            id={`check-${product.id}`}
             name="check"
             className={styles.checkboxInput}
           />
           <span className={styles.checkboxCustom}></span>
         </label>
-        <span className={styles.greySquare}></span>
+        {/* Пока так, но вопрос нужно ли... */}
+        {product.thumbnail && (
+          <img
+            src={product.thumbnail}
+            alt={product.name}
+            className={styles.thumbnail}
+          />
+        )}
+        {!product.thumbnail && <span className={styles.greySquare}></span>}
+
         <div className={styles.commodity}>
-          <span className={styles.name}>Название</span>
-          <span className={styles.category}>Категория</span>
+          <span className={styles.name}>{product.name}</span>
+          <span className={styles.category}>{product.category}</span>
         </div>
       </div>
-      <span className={styles.vendor}>Вендор</span>
-      <span className={styles.article}>Артикул</span>
-      <span className={styles.rating}>Оценка</span>
-      <span className={styles.price}>Цена</span>
+
+      <span className={styles.vendor}>{product.vendor}</span>
+      <span className={styles.article}>{product.article}</span>
+      <span className={styles.rating}>{product.rating.toFixed(1)}</span>
+      <span className={styles.price}>{product.price.toFixed(2)} ₽</span>
+
       <div className={styles.buttons}>
         <button className={styles.plusButton}>+</button>
         <button className={styles.dotesButton}>...</button>

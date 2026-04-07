@@ -43,3 +43,21 @@ export interface IAuthFormState {
   remember: boolean;
   loading: boolean;
 }
+
+export interface IProductsListProps {
+  page: number;
+  onPageChange?: (page: number) => void;
+}
+
+export interface IProductItemProps {
+  product: IProduct;
+}
+
+export interface IProductsCountProps {
+  total: number;
+  skip: number;
+  limit: number;
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+}
