@@ -23,8 +23,14 @@ const ProductsCount = ({
   const renderPageButtons = () => {
     const buttons = [];
     const maxVisible = 5;
-    const start = Math.max(1, currentPage - Math.floor(maxVisible / 2));
-    const end = Math.min(totalPages, start + maxVisible - 1);
+
+    let start = Math.max(1, currentPage - 2);
+    let end = Math.min(totalPages, start + maxVisible - 1);
+
+    // Чтобы всегда было 5 кнопок (если возможно)
+    if (end - start + 1 < maxVisible && totalPages >= maxVisible) {
+      start = Math.max(1, end - maxVisible + 1);
+    }
 
     for (let i = start; i <= end; i++) {
       buttons.push(
@@ -39,6 +45,7 @@ const ProductsCount = ({
         </button>,
       );
     }
+
     return buttons;
   };
 
@@ -55,17 +62,15 @@ const ProductsCount = ({
       </div>
 
       <div className={styles.pages}>
-        <button
-          className={styles.left}
-          onClick={handlePrev}
-          disabled={currentPage === 1}
-        ></button>
+        {/* Не видна, если первая страница */}
+        {currentPage > 1 && (
+          <button className={styles.left} onClick={handlePrev}></button>
+        )}
         {totalPages > 0 && renderPageButtons()}{" "}
-        <button
-          className={styles.right}
-          onClick={handleNext}
-          disabled={currentPage === totalPages}
-        ></button>
+        {/* Не видна, если последняя страница */}
+        {currentPage < totalPages && (
+          <button className={styles.right} onClick={handleNext}></button>
+        )}
       </div>
     </div>
   );
