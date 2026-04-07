@@ -1,10 +1,12 @@
 export interface IProduct {
+  id: number;
   name: string;
   category: string;
   vendor: string;
   article: string;
   rating: number;
   price: number;
+  thumbnail?: string;
 }
 
 export interface IProductsList {
