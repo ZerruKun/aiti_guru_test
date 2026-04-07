@@ -16,8 +16,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* Временно */
-    max-width: 980px;
 }
 
 .goods {
@@ -64,4 +62,10 @@
     left: 15px;
     width: 24px;
     height: 24px;
+}
+
+@media (max-width: 500px) {
+ .search {
+    margin-left: 50px;
+ }
 }

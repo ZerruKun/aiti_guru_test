@@ -2,6 +2,7 @@ import AddProduct from "../components/AddProduct";
 import SearchProduct from "../components/SearchProduct";
 import ProductsList from "../components/ProductsList";
 import ProductsCount from "../components/ProductsCount";
+import styles from "../styles/modules/ProductsPage.module.css";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -17,7 +18,7 @@ const ProductsPage = () => {
   }, [navigate]);
 
   return (
-    <div>
+    <div className={styles.general}>
       <SearchProduct />
       <AddProduct />
       <ProductsList />

@@ -1,14 +1,17 @@
 .general {
     display: grid;
     grid-template-columns: 
-      320px
-      180px
-      150px
-      100px
-      120px
+      minmax(280px, 1fr)
+      minmax(140px, 180px)
+      minmax(120px, 150px)
+      minmax(80px, 100px)
+      minmax(100px, 120px)
       80px;
     align-items: center;
-    width: fit-content;
+    width: 100%;
+    max-width: 1920px;
+    padding: 18px;
+    box-sizing: border-box;
     user-select: none;
     -webkit-user-select: none;
     padding: 18px;

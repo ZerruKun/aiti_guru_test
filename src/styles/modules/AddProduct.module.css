@@ -16,8 +16,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* Временно */
-    max-width: 980px;
 }
 
 .allPositions {
