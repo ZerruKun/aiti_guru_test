@@ -20,7 +20,6 @@ const ProductsCount = ({
     if (currentPage < totalPages) onPageChange(currentPage + 1);
   };
 
-  // Генерация кнопок страниц (пока просто 1-5 для примера)
   const renderPageButtons = () => {
     const buttons = [];
     const maxVisible = 5;
@@ -61,9 +60,7 @@ const ProductsCount = ({
           onClick={handlePrev}
           disabled={currentPage === 1}
         ></button>
-
-        {renderPageButtons()}
-
+        {totalPages > 0 && renderPageButtons()}{" "}
         <button
           className={styles.right}
           onClick={handleNext}

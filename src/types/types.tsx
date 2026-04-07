@@ -13,6 +13,13 @@ export interface IProductsList {
   products: IProduct[];
 }
 
+export interface IProductsResponse {
+  products: IProduct[];
+  total: number;
+  skip: number;
+  limit: number;
+}
+
 export interface IAuthErrors {
   login?: string;
   password?: string;
@@ -46,7 +53,7 @@ export interface IAuthFormState {
 
 export interface IProductsListProps {
   page: number;
-  onPageChange?: (page: number) => void;
+  onTotalChange?: (total: number) => void;
 }
 
 export interface IProductItemProps {

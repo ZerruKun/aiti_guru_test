@@ -14,7 +14,6 @@ const ProductItem = ({ product }: IProductItemProps) => {
           />
           <span className={styles.checkboxCustom}></span>
         </label>
-        {/* Пока так, но вопрос нужно ли... */}
         {product.thumbnail && (
           <img
             src={product.thumbnail}

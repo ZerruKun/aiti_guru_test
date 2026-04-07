@@ -1,13 +1,6 @@
 import { useState, useEffect } from "react";
-import type { IProduct } from "../types/types";
+import type { IProductsResponse } from "../types/types";
 import { transformProducts } from "../utils/transformers";
-
-interface IProductsResponse {
-  products: IProduct[];
-  total: number;
-  skip: number;
-  limit: number;
-}
 
 export const useProducts = (page: number, limit: number = 20) => {
   const [data, setData] = useState<IProductsResponse>({
