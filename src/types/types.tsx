@@ -123,3 +123,10 @@ export interface IProductsHeaderProps {
   sortOrder: ISortOrder;
   onSort: (field: ISortField) => void;
 }
+
+// Для поиска
+
+export interface ISearchProductProps {
+  searchTerm: string;
+  onSearchChange: (term: string) => void;
+}

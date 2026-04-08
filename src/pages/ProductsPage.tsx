@@ -21,9 +21,12 @@ const ProductsPage = () => {
     type: "success" | "error";
   } | null>(null);
 
-  // Для сортировки
+  // Сортировка
   const [sortField, setSortField] = useState<ISortField>(null);
   const [sortOrder, setSortOrder] = useState<ISortOrder>(null);
+
+  // Поиск
+  const [searchTerm, setSearchTerm] = useState("");
 
   // Проверка авторизации
   useEffect(() => {
@@ -60,14 +63,14 @@ const ProductsPage = () => {
       });
   };
 
-  // Обновление и очистка (кнопка со стрелочками длябом с "Добавить")
+  // Обновление и очиска (две стрелочки рядом с "Добавить")
   const handleRefresh = () => {
     setLocalProducts([]);
     loadProducts();
     setToast({ message: "Список товаров обновлён", type: "success" });
   };
 
-  // Первый рендер
+  // Загрузка при первом рендере
   useEffect(() => {
     loadProducts();
   }, []);
@@ -95,7 +98,13 @@ const ProductsPage = () => {
     setToast({ message: "Товар успешно добавлен!", type: "success" });
   };
 
-  // Сортировка
+  // Обработчик поиска
+  const handleSearchChange = (term: string) => {
+    setSearchTerm(term);
+    setCurrentPage(1);
+  };
+
+  // Обработчик сортировки
   const handleSort = (field: ISortField) => {
     if (sortField === field) {
       if (sortOrder === "asc") {
@@ -110,25 +119,55 @@ const ProductsPage = () => {
       setSortField(field);
       setSortOrder("asc");
     }
+
     setCurrentPage(1);
   };
 
   // Пагинация... Хотелось без оверинженеринга, но получилось вот так.
-  const products = [...localProducts, ...allProducts];
+  let products = [...localProducts, ...allProducts];
+
+  // Фильтрация по поиску (если есть searchTerm, ище по 4-ём полям)
+  if (searchTerm.trim()) {
+    const term = searchTerm.toLowerCase().trim();
+    products = products.filter((product) => {
+      const name = product.name?.toLowerCase() || "";
+      const vendor = product.vendor?.toLowerCase() || "";
+      const article = product.article?.toLowerCase() || "";
+      const category = product.category?.toLowerCase() || "";
+
+      return (
+        name.includes(term) ||
+        vendor.includes(term) ||
+        article.includes(term) ||
+        category.includes(term)
+      );
+    });
+  }
+
+  // Применение сортировки
   const sortedProducts = [...products].sort((a, b) => {
     if (!sortField || !sortOrder) return 0;
+
     const multiplier = sortOrder === "asc" ? 1 : -1;
+
     if (sortField === "rating") {
-      return (a.rating - b.rating) * multiplier;
+      return ((a.rating ?? 0) - (b.rating ?? 0)) * multiplier;
     } else if (sortField === "price") {
-      return (a.price - b.price) * multiplier;
+      return ((a.price ?? 0) - (b.price ?? 0)) * multiplier;
     }
+
     return 0;
   });
+
+  // Общее количество товаров (после фильтрации и сортировки)
   const total = sortedProducts.length;
+  // Общее количество страниц
   const totalPages = Math.ceil(total / PRODUCTS_PER_PAGE);
+  // Вычисляем skip для текущей страницы
   const skip = (currentPage - 1) * PRODUCTS_PER_PAGE;
+  // Товары ТОЛЬКО текущей страницы
   const productsOnPage = sortedProducts.slice(skip, skip + PRODUCTS_PER_PAGE);
+  // Вычисление для отображения
   const fromProduct = productsOnPage.length > 0 ? skip + 1 : 0;
   const toProduct = skip + productsOnPage.length;
 
@@ -136,7 +175,10 @@ const ProductsPage = () => {
   if (loading) {
     return (
       <div className={styles.general}>
-        <SearchProduct />
+        <SearchProduct
+          searchTerm={searchTerm}
+          onSearchChange={handleSearchChange}
+        />
         <AddProduct onAdd={handleAddProduct} onRefresh={handleRefresh} />
         <div className={styles.loading}>Загрузка товаров...</div>
       </div>
@@ -145,7 +187,10 @@ const ProductsPage = () => {
 
   return (
     <div className={styles.general}>
-      <SearchProduct />
+      <SearchProduct
+        searchTerm={searchTerm}
+        onSearchChange={handleSearchChange}
+      />
 
       <AddProduct onAdd={handleAddProduct} onRefresh={handleRefresh} />
 
