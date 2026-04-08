@@ -51,10 +51,14 @@ export interface IAuthFormState {
   loading: boolean;
 }
 
+// Для работы с продуктами
 export interface IProductsListProps {
   page: number;
   products: IProduct[];
   onTotalChange?: (total: number) => void;
+  sortField?: ISortField;
+  sortOrder?: ISortOrder;
+  onSort?: (field: ISortField) => void;
 }
 
 export interface IProductItemProps {
@@ -107,4 +111,15 @@ export interface IAddProductErrors {
   vendor?: string;
   article?: string;
   rating?: string;
+}
+
+// Для сортировки
+export type ISortOrder = "asc" | "desc" | null;
+
+export type ISortField = "rating" | "price" | null;
+
+export interface IProductsHeaderProps {
+  sortField: ISortField;
+  sortOrder: ISortOrder;
+  onSort: (field: ISortField) => void;
 }

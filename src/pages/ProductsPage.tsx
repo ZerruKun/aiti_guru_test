@@ -6,7 +6,7 @@ import ProductsList from "../components/ProductsList";
 import ProductsCount from "../components/ProductsCount";
 import Toast from "../components/Toast";
 import styles from "../styles/modules/ProductsPage.module.css";
-import type { IProduct } from "../types/types";
+import type { IProduct, ISortField, ISortOrder } from "../types/types";
 
 const PRODUCTS_PER_PAGE = 20;
 
@@ -20,6 +20,10 @@ const ProductsPage = () => {
     message: string;
     type: "success" | "error";
   } | null>(null);
+
+  // Для сортировки
+  const [sortField, setSortField] = useState<ISortField>(null);
+  const [sortOrder, setSortOrder] = useState<ISortOrder>(null);
 
   // Проверка авторизации
   useEffect(() => {
@@ -56,12 +60,14 @@ const ProductsPage = () => {
       });
   };
 
+  // Обновление и очистка (кнопка со стрелочками длябом с "Добавить")
   const handleRefresh = () => {
     setLocalProducts([]);
     loadProducts();
     setToast({ message: "Список товаров обновлён", type: "success" });
   };
 
+  // Первый рендер
   useEffect(() => {
     loadProducts();
   }, []);
@@ -84,18 +90,45 @@ const ProductsPage = () => {
       price: newProduct.price,
       thumbnail: "",
     };
+
     setLocalProducts((prev) => [product, ...prev]);
     setToast({ message: "Товар успешно добавлен!", type: "success" });
   };
 
-  // === ВЫЧИСЛЕНИЯ ДЛЯ ПАГИНАЦИИ ===
+  // Сортировка
+  const handleSort = (field: ISortField) => {
+    if (sortField === field) {
+      if (sortOrder === "asc") {
+        setSortOrder("desc");
+      } else if (sortOrder === "desc") {
+        setSortField(null);
+        setSortOrder(null);
+      } else {
+        setSortOrder("asc");
+      }
+    } else {
+      setSortField(field);
+      setSortOrder("asc");
+    }
+    setCurrentPage(1);
+  };
 
-  // Пагинация... Хотелось без оверинженеринга, но получилось вот так
+  // Пагинация... Хотелось без оверинженеринга, но получилось вот так.
   const products = [...localProducts, ...allProducts];
-  const total = products.length;
+  const sortedProducts = [...products].sort((a, b) => {
+    if (!sortField || !sortOrder) return 0;
+    const multiplier = sortOrder === "asc" ? 1 : -1;
+    if (sortField === "rating") {
+      return (a.rating - b.rating) * multiplier;
+    } else if (sortField === "price") {
+      return (a.price - b.price) * multiplier;
+    }
+    return 0;
+  });
+  const total = sortedProducts.length;
   const totalPages = Math.ceil(total / PRODUCTS_PER_PAGE);
   const skip = (currentPage - 1) * PRODUCTS_PER_PAGE;
-  const productsOnPage = products.slice(skip, skip + PRODUCTS_PER_PAGE);
+  const productsOnPage = sortedProducts.slice(skip, skip + PRODUCTS_PER_PAGE);
   const fromProduct = productsOnPage.length > 0 ? skip + 1 : 0;
   const toProduct = skip + productsOnPage.length;
 
@@ -120,6 +153,9 @@ const ProductsPage = () => {
         page={currentPage}
         products={productsOnPage}
         onTotalChange={() => {}}
+        sortField={sortField}
+        sortOrder={sortOrder}
+        onSort={handleSort}
       />
 
       <ProductsCount

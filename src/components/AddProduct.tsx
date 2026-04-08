@@ -102,7 +102,8 @@ const AddProduct = ({ onAdd, onRefresh }: IAddProductProps) => {
                 <label>Цена, ₽</label>
                 <input
                   type="number"
-                  step="0.01"
+                  step="0.1"
+                  min="1.0"
                   value={formData.price}
                   onChange={(e) =>
                     setFormData({ ...formData, price: e.target.value })
