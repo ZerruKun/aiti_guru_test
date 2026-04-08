@@ -31,8 +31,27 @@ const ProductItem = ({ product }: IProductItemProps) => {
 
       <span className={styles.vendor}>{product.vendor}</span>
       <span className={styles.article}>{product.article}</span>
-      <span className={styles.rating}>{product.rating.toFixed(1)}</span>
-      <span className={styles.price}>{product.price.toFixed(2)} ₽</span>
+      <span className={styles.rating}>
+        <span
+          className={
+            product.rating < 3.5 ? styles.lowRating : styles.normalRating
+          }
+        >
+          {product.rating.toFixed(1)}
+        </span>
+        /5
+      </span>
+      <span className={styles.price}>
+        {(() => {
+          const [whole, decimal] = product.price.toFixed(2).split(".");
+          return (
+            <>
+              {whole}
+              <span className={styles.priceDecimal}>.{decimal}</span> ₽
+            </>
+          );
+        })()}
+      </span>
 
       <div className={styles.buttons}>
         <button className={styles.plusButton}>+</button>
