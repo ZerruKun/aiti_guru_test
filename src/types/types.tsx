@@ -83,6 +83,7 @@ export interface IAddProductProps {
     article: string;
     rating: number;
   }) => void;
+  onRefresh?: () => void;
 }
 
 export interface IToastProps {

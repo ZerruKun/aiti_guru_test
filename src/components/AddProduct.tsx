@@ -6,7 +6,7 @@ import type {
 } from "../types/types";
 import styles from "../styles/modules/AddProduct.module.css";
 
-const AddProduct = ({ onAdd }: IAddProductProps) => {
+const AddProduct = ({ onAdd, onRefresh }: IAddProductProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState<IAddProductForm>({
     name: "",
@@ -25,8 +25,6 @@ const AddProduct = ({ onAdd }: IAddProductProps) => {
       newErrors.price = "Введите корректную цену";
     if (!formData.vendor.trim()) newErrors.vendor = "Введите вендора";
     if (!formData.article.trim()) newErrors.article = "Введите артикул";
-
-    // ← Валидация рейтинга (0.1 - 5.0)
     if (!formData.rating || isNaN(Number(formData.rating))) {
       newErrors.rating = "Введите рейтинг";
     } else {
@@ -62,7 +60,10 @@ const AddProduct = ({ onAdd }: IAddProductProps) => {
       <div className={styles.general}>
         <span className={styles.allPositions}>Все позиции</span>
         <div className={styles.buttons}>
-          <button className={styles.refreshButton}></button>
+          <button
+            className={styles.refreshButton}
+            onClick={() => onRefresh?.()}
+          ></button>
           <button
             className={styles.addButton}
             onClick={() => setIsModalOpen(true)}

@@ -21,15 +21,15 @@ const ProductsPage = () => {
     type: "success" | "error";
   } | null>(null);
 
-  // Авторизация и её проверка
+  // Проверка авторизации
   useEffect(() => {
     const token =
       localStorage.getItem("token") || sessionStorage.getItem("token");
     if (!token) navigate("/auth", { replace: true });
   }, [navigate]);
 
-  // получение товаров из API
-  useEffect(() => {
+  // Получение товаров из API
+  const loadProducts = () => {
     setLoading(true);
 
     fetch(`https://dummyjson.com/products?limit=200&skip=0`)
@@ -54,6 +54,16 @@ const ProductsPage = () => {
       .finally(() => {
         setLoading(false);
       });
+  };
+
+  const handleRefresh = () => {
+    setLocalProducts([]);
+    loadProducts();
+    setToast({ message: "Список товаров обновлён", type: "success" });
+  };
+
+  useEffect(() => {
+    loadProducts();
   }, []);
 
   // Обработчик добавления товара
@@ -74,12 +84,13 @@ const ProductsPage = () => {
       price: newProduct.price,
       thumbnail: "",
     };
-
     setLocalProducts((prev) => [product, ...prev]);
     setToast({ message: "Товар успешно добавлен!", type: "success" });
   };
 
-  // Пагинация... Хотелось без оверинженеринга, но получилось вот так.
+  // === ВЫЧИСЛЕНИЯ ДЛЯ ПАГИНАЦИИ ===
+
+  // Пагинация... Хотелось без оверинженеринга, но получилось вот так
   const products = [...localProducts, ...allProducts];
   const total = products.length;
   const totalPages = Math.ceil(total / PRODUCTS_PER_PAGE);
@@ -93,8 +104,8 @@ const ProductsPage = () => {
     return (
       <div className={styles.general}>
         <SearchProduct />
-        <AddProduct onAdd={handleAddProduct} />
-        <div className={styles.loading}>Загрузка...</div>
+        <AddProduct onAdd={handleAddProduct} onRefresh={handleRefresh} />
+        <div className={styles.loading}>Загрузка товаров...</div>
       </div>
     );
   }
@@ -102,7 +113,8 @@ const ProductsPage = () => {
   return (
     <div className={styles.general}>
       <SearchProduct />
-      <AddProduct onAdd={handleAddProduct} />
+
+      <AddProduct onAdd={handleAddProduct} onRefresh={handleRefresh} />
 
       <ProductsList
         page={currentPage}
