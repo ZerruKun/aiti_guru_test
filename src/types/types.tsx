@@ -53,6 +53,7 @@ export interface IAuthFormState {
 
 export interface IProductsListProps {
   page: number;
+  products: IProduct[];
   onTotalChange?: (total: number) => void;
 }
 
@@ -62,9 +63,47 @@ export interface IProductItemProps {
 
 export interface IProductsCountProps {
   total: number;
-  skip: number;
-  limit: number;
+  fromProduct: number;
+  toProduct: number;
   currentPage: number;
   totalPages: number;
   onPageChange: (page: number) => void;
+}
+
+export interface IProductsCountPropsFixed extends IProductsCountProps {
+  fromProduct: number;
+  toProduct: number;
+}
+
+export interface IAddProductProps {
+  onAdd: (product: {
+    name: string;
+    price: number;
+    vendor: string;
+    article: string;
+    rating: number;
+  }) => void;
+}
+
+export interface IToastProps {
+  message: string;
+  type?: "success" | "error";
+  onClose: () => void;
+  duration?: number;
+}
+
+export interface IAddProductForm {
+  name: string;
+  price: string;
+  vendor: string;
+  article: string;
+  rating: string;
+}
+
+export interface IAddProductErrors {
+  name?: string;
+  price?: string;
+  vendor?: string;
+  article?: string;
+  rating?: string;
 }

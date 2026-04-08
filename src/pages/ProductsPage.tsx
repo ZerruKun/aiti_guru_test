@@ -4,47 +4,128 @@ import AddProduct from "../components/AddProduct";
 import SearchProduct from "../components/SearchProduct";
 import ProductsList from "../components/ProductsList";
 import ProductsCount from "../components/ProductsCount";
+import Toast from "../components/Toast";
 import styles from "../styles/modules/ProductsPage.module.css";
+import type { IProduct } from "../types/types";
 
 const PRODUCTS_PER_PAGE = 20;
 
 const ProductsPage = () => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
-  const [total, setTotal] = useState(0);
+  const [allProducts, setAllProducts] = useState<IProduct[]>([]);
+  const [localProducts, setLocalProducts] = useState<IProduct[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [toast, setToast] = useState<{
+    message: string;
+    type: "success" | "error";
+  } | null>(null);
 
+  // Авторизация и её проверка
   useEffect(() => {
     const token =
       localStorage.getItem("token") || sessionStorage.getItem("token");
     if (!token) navigate("/auth", { replace: true });
   }, [navigate]);
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  // получение товаров из API
+  useEffect(() => {
+    setLoading(true);
+
+    fetch(`https://dummyjson.com/products?limit=200&skip=0`)
+      .then((res) => res.json())
+      .then((data) => {
+        const transformed = data.products.map((api: any) => ({
+          id: api.id,
+          name: api.title,
+          category: api.category,
+          vendor: api.brand,
+          article: api.sku,
+          rating: api.rating,
+          price: api.price,
+          thumbnail: api.thumbnail,
+        }));
+
+        setAllProducts(transformed);
+      })
+      .catch((err) => {
+        console.error("Ошибка загрузки:", err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
+  // Обработчик добавления товара
+  const handleAddProduct = (newProduct: {
+    name: string;
+    price: number;
+    vendor: string;
+    article: string;
+    rating: number;
+  }) => {
+    const product: IProduct = {
+      id: Date.now(),
+      name: newProduct.name,
+      category: "new",
+      vendor: newProduct.vendor,
+      article: newProduct.article,
+      rating: newProduct.rating,
+      price: newProduct.price,
+      thumbnail: "",
+    };
+
+    setLocalProducts((prev) => [product, ...prev]);
+    setToast({ message: "Товар успешно добавлен!", type: "success" });
   };
 
-  const handleTotalChange = (newTotal: number) => {
-    setTotal(newTotal);
-  };
-
+  // Пагинация... Хотелось без оверинженеринга, но получилось вот так.
+  const products = [...localProducts, ...allProducts];
+  const total = products.length;
   const totalPages = Math.ceil(total / PRODUCTS_PER_PAGE);
+  const skip = (currentPage - 1) * PRODUCTS_PER_PAGE;
+  const productsOnPage = products.slice(skip, skip + PRODUCTS_PER_PAGE);
+  const fromProduct = productsOnPage.length > 0 ? skip + 1 : 0;
+  const toProduct = skip + productsOnPage.length;
+
+  // Всё ещё заглушка. Прогресс-бар в процессе
+  if (loading) {
+    return (
+      <div className={styles.general}>
+        <SearchProduct />
+        <AddProduct onAdd={handleAddProduct} />
+        <div className={styles.loading}>Загрузка...</div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.general}>
       <SearchProduct />
-      <AddProduct />
+      <AddProduct onAdd={handleAddProduct} />
 
-      <ProductsList page={currentPage} onTotalChange={handleTotalChange} />
+      <ProductsList
+        page={currentPage}
+        products={productsOnPage}
+        onTotalChange={() => {}}
+      />
 
       <ProductsCount
         total={total}
-        skip={(currentPage - 1) * PRODUCTS_PER_PAGE}
-        limit={PRODUCTS_PER_PAGE}
+        fromProduct={fromProduct}
+        toProduct={toProduct}
         currentPage={currentPage}
         totalPages={totalPages}
-        onPageChange={handlePageChange}
+        onPageChange={setCurrentPage}
       />
+
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
+      )}
     </div>
   );
 };

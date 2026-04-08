@@ -1,17 +1,14 @@
-import type { IProductsCountProps } from "../types/types";
+import type { IProductsCountPropsFixed } from "../types/types";
 import styles from "../styles/modules/ProductsCount.module.css";
 
 const ProductsCount = ({
   total,
-  skip,
-  limit,
+  fromProduct,
+  toProduct,
   currentPage,
   totalPages,
   onPageChange,
-}: IProductsCountProps) => {
-  const fromProduct = skip + 1;
-  const toProduct = Math.min(skip + limit, total);
-
+}: IProductsCountPropsFixed) => {
   const handlePrev = () => {
     if (currentPage > 1) onPageChange(currentPage - 1);
   };
@@ -27,7 +24,6 @@ const ProductsCount = ({
     let start = Math.max(1, currentPage - 2);
     let end = Math.min(totalPages, start + maxVisible - 1);
 
-    // Чтобы всегда было 5 кнопок (если возможно)
     if (end - start + 1 < maxVisible && totalPages >= maxVisible) {
       start = Math.max(1, end - maxVisible + 1);
     }
@@ -62,12 +58,10 @@ const ProductsCount = ({
       </div>
 
       <div className={styles.pages}>
-        {/* Не видна, если первая страница */}
         {currentPage > 1 && (
           <button className={styles.left} onClick={handlePrev}></button>
         )}
-        {totalPages > 0 && renderPageButtons()}{" "}
-        {/* Не видна, если последняя страница */}
+        {totalPages > 0 && renderPageButtons()}
         {currentPage < totalPages && (
           <button className={styles.right} onClick={handleNext}></button>
         )}
