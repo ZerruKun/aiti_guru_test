@@ -1,44 +1,76 @@
+// "Менеджер товаров" - загрузка, хранение, добавление, обновление
 import { useState, useEffect } from "react";
-import type { IProductsResponse } from "../types/types";
-import { transformProducts } from "../utils/transformers";
+import type { IProduct } from "../types/types";
 
-export const useProducts = (page: number, limit: number = 20) => {
-  const [data, setData] = useState<IProductsResponse>({
-    products: [],
-    total: 0,
-    skip: 0,
-    limit,
-  });
+export const useProducts = () => {
+  const [products, setProducts] = useState<IProduct[]>([]);
+  const [localProducts, setLocalProducts] = useState<IProduct[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const skip = (page - 1) * limit;
-    
+  const loadProducts = async () => {
     setLoading(true);
     setError(null);
 
-    fetch(`https://dummyjson.com/products?limit=${limit}&skip=${skip}`)
-      .then((res) => {
-        if (!res.ok) throw new Error("Не удалось загрузить товары");
-        return res.json();
-      })
-      .then((apiData) => {
-        const products = transformProducts(apiData.products);
-        setData({
-          products,
-          total: apiData.total,
-          skip: apiData.skip,
-          limit: apiData.limit,
-        });
-      })
-      .catch((err) => {
-        setError(err.message);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [page, limit]);
+    try {
+      const response = await fetch(`https://dummyjson.com/products?limit=200&skip=0`);
+      if (!response.ok) throw new Error("Не удалось загрузить товары");
+      
+      const data = await response.json();
+      const transformed = data.products.map((api: any): IProduct => ({
+        id: api.id,
+        name: api.title,
+        category: api.category,
+        vendor: api.brand,
+        article: api.sku,
+        rating: api.rating,
+        price: api.price,
+        thumbnail: api.thumbnail,
+      }));
 
-  return { ...data, loading, error };
+      setProducts(transformed);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Ошибка загрузки");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const addProduct = (newProduct: {
+    name: string;
+    price: number;
+    vendor: string;
+    article: string;
+    rating: number;
+    category?: string;
+  }) => {
+    const product: IProduct = {
+      ...newProduct,
+      id: Date.now(),
+      category: newProduct.category || "new",
+      thumbnail: "",
+    };
+    setLocalProducts((prev) => [product, ...prev]);
+  };
+
+  const clearLocalProducts = () => {
+    setLocalProducts([]);
+  };
+
+  const allProducts = [...localProducts, ...products];
+
+  useEffect(() => {
+    loadProducts();
+  }, []);
+
+  return {
+    products: allProducts,
+    loading,
+    error,
+    loadProducts,
+    addProduct,
+    clearLocalProducts,
+  };
 };
+
+export default useProducts;

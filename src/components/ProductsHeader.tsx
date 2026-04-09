@@ -23,7 +23,7 @@ const ProductsHeader = ({
       <span className={styles.headerVendor}>Вендор</span>
       <span className={styles.headerArticle}>Артикул</span>
 
-      {/* ← Сортируемый заголовок: Оценка */}
+      {/*Сортируемый заголовок: Оценка */}
       <span
         className={`${styles.headerRating} ${sortField === "rating" ? styles.sorted : ""}`}
         onClick={() => handleSort("rating")}
@@ -33,7 +33,7 @@ const ProductsHeader = ({
         Оценка {getSortIcon("rating")}
       </span>
 
-      {/* ← Сортируемый заголовок: Цена */}
+      {/*Сортируемый заголовок: Цена */}
       <span
         className={`${styles.headerPrice} ${sortField === "price" ? styles.sorted : ""}`}
         onClick={() => handleSort("price")}

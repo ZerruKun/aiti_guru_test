@@ -1,9 +1,9 @@
-import styles from "../styles/modules/AuthPage.module.css";
-import authPic from "../styles/images/auth_pic.svg";
-import type { IAuthErrors } from "../types/types";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import type { ILoginCredentials, IUser } from "../types/types";
+import styles from "../styles/modules/AuthPage.module.css";
+import authPic from "../styles/images/auth_pic.svg";
+import { storage } from "../utils/storage";
+import type { IAuthErrors, ILoginCredentials, IUser } from "../types/types";
 
 const AuthPage = () => {
   const [login, setLogin] = useState("");
@@ -13,6 +13,7 @@ const AuthPage = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  // Вализация значений в полях
   const validate = (): boolean => {
     const newErrors: IAuthErrors = {};
 
@@ -27,6 +28,7 @@ const AuthPage = () => {
     return Object.keys(newErrors).length === 0;
   };
 
+  //
   const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -59,18 +61,14 @@ const AuthPage = () => {
 
       const user: IUser = data;
 
-      const { token } = user;
+      // Отправка в "хранилище"
+      storage.setToken(user.token, remember);
+      storage.setUser(user, remember);
 
-      if (remember) {
-        localStorage.setItem("token", token);
-        localStorage.setItem("user", JSON.stringify(user));
-      } else {
-        sessionStorage.setItem("token", token);
-        sessionStorage.setItem("user", JSON.stringify(user));
-      }
       navigate("/products");
     } catch (err) {
       setErrors({ general: "Не удалось подключиться к серверу" });
+    } finally {
       setLoading(false);
     }
   };

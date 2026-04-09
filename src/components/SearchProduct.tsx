@@ -8,7 +8,6 @@ const SearchProduct = ({ searchTerm, onSearchChange }: ISearchProductProps) => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      // ← Безопасный вызов: проверяем, что это функция
       if (typeof onSearchChange === "function") {
         onSearchChange(inputValue);
       }

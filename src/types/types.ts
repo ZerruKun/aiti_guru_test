@@ -1,3 +1,7 @@
+// Оставлено в одном файле с комментариями
+// При необходимости можно будет разнести в отдельнве файлы
+
+// Основные сущности
 export interface IProduct {
   id: number;
   name: string;
@@ -9,30 +13,6 @@ export interface IProduct {
   thumbnail?: string;
 }
 
-export interface IProductsList {
-  products: IProduct[];
-}
-
-export interface IProductsResponse {
-  products: IProduct[];
-  total: number;
-  skip: number;
-  limit: number;
-}
-
-export interface IAuthErrors {
-  login?: string;
-  password?: string;
-  general?: string;
-}
-
-export interface ILoginCredentials {
-  username: string;
-  password: string;
-  expiresInMins?: number;
-}
-
-// Поля от DummyJSON
 export interface IUser {
   id: number;
   username: string;
@@ -44,6 +24,32 @@ export interface IUser {
   token: string;
 }
 
+// Структуры ответов от серверов
+export interface IProductsResponse {
+  products: IProduct[];
+  total: number;
+  skip: number;
+  limit: number;
+}
+
+export interface IProductsList {
+  products: IProduct[];
+}
+
+export interface ILoginCredentials {
+  username: string;
+  password: string;
+  expiresInMins?: number;
+}
+
+
+// Авторизация и форма входа
+export interface IAuthErrors {
+  login?: string;
+  password?: string;
+  general?: string;
+}
+
 export interface IAuthFormState {
   login: string;
   password: string;
@@ -51,7 +57,9 @@ export interface IAuthFormState {
   loading: boolean;
 }
 
-// Для работы с продуктами
+// Пропсы для компонентов
+
+// Товары
 export interface IProductsListProps {
   page: number;
   products: IProduct[];
@@ -74,11 +82,13 @@ export interface IProductsCountProps {
   onPageChange: (page: number) => void;
 }
 
-export interface IProductsCountPropsFixed extends IProductsCountProps {
-  fromProduct: number;
-  toProduct: number;
+export interface IProductsHeaderProps {
+  sortField: ISortField;
+  sortOrder: ISortOrder;
+  onSort: (field: ISortField) => void;
 }
 
+// Добавление товара
 export interface IAddProductProps {
   onAdd: (product: {
     name: string;
@@ -88,13 +98,6 @@ export interface IAddProductProps {
     rating: number;
   }) => void;
   onRefresh?: () => void;
-}
-
-export interface IToastProps {
-  message: string;
-  type?: "success" | "error";
-  onClose: () => void;
-  duration?: number;
 }
 
 export interface IAddProductForm {
@@ -113,20 +116,25 @@ export interface IAddProductErrors {
   rating?: string;
 }
 
-// Для сортировки
+// Поиск и уведомления
+export interface ISearchProductProps {
+  searchTerm: string;
+  onSearchChange: (term: string) => void;
+}
+
+export interface IToastProps {
+  message: string;
+  type?: "success" | "error";
+  onClose: () => void;
+  duration?: number;
+}
+
+// Вспомогательные типы
 export type ISortOrder = "asc" | "desc" | null;
 
 export type ISortField = "rating" | "price" | null;
 
-export interface IProductsHeaderProps {
-  sortField: ISortField;
-  sortOrder: ISortOrder;
-  onSort: (field: ISortField) => void;
-}
-
-// Для поиска
-
-export interface ISearchProductProps {
-  searchTerm: string;
-  onSearchChange: (term: string) => void;
+export interface IProductsCountPropsFixed extends IProductsCountProps {
+  fromProduct: number;
+  toProduct: number;
 }

@@ -1,3 +1,4 @@
+// Товар будет добавляться в начало (просто, чтобы сразу его было видно)
 import { useState } from "react";
 import type {
   IAddProductProps,
