@@ -6,6 +6,7 @@ https://docs.google.com/document/d/15Iq9gp4POgv7rw0-WFwSpIYmqS1IGBh0P0lYoNBwNbA/
 
 ## Структура проекта
 
+```
 src
 ├── components
 │ ├── AddProduct.tsx
@@ -58,6 +59,7 @@ src
 ├── App.tsx
 ├── main.tsx
 └── vite-env.d.ts
+```
 
 ## Тестовые данные для авторизации
 
