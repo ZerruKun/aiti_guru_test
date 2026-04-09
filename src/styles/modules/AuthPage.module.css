@@ -1,0 +1,304 @@
+@font-face {
+    font-family: 'Inter';
+    src: url('../fonts/Inter_18pt-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../fonts/Inter_18pt-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../fonts/Inter_18pt-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+.mainWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.general {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 515px;
+    margin: 0 auto;
+    padding: 48px;
+    border: 1px solid #EDEDED;
+    border-radius: 40px;
+    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.general input,
+.general a {
+    user-select: text;
+    -webkit-user-select: text;
+}
+
+.general::before {
+    content: '';
+    position: absolute;
+    top: 1%;
+    left: 1.5%;
+    right: 0;
+    height: 55%;
+    width: 97%;
+    border-top: 1px solid #EDEDED;
+    border-left: 1px solid #EDEDED;
+    border-right: 1px solid #EDEDED;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.general > * {
+    position: relative;
+    z-index: 2;
+}
+
+.hello {
+    font-family: 'Inter', Roboto, sans-serif;
+    font-size: 40px;
+    font-weight: 600;
+    margin-bottom: 13px;
+    letter-spacing: -1.5%;
+}
+
+.bottomHello {
+    font-family: 'Inter', Roboto, sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 32px;
+    color: #E0E0E0;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+    width: 100%; 
+}
+
+.fieldsWrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.fieldWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+}
+
+.fieldWrapper input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #DDD;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    box-sizing: border-box;
+}
+
+.fieldWrapper label {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+}
+
+.fieldWrapper input:hover {
+    outline: none;
+    border-color: #BBB;
+}
+
+.fieldWrapper input:focus {
+    outline: none;
+    border-color: #242EDB;
+}
+
+
+.save {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    color: #E0E0E0;
+}
+
+.checkboxInput {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkboxLabel {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    color: #9C9C9C;
+    cursor: pointer;
+    user-select: none;
+}
+
+.checkboxCustom {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
+    background-color: #FFF;
+    flex-shrink: 0;
+    position: relative;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.checkboxLabel:hover .checkboxCustom {
+   border-color: #BBB;
+}
+
+.checkboxInput:checked + .checkboxLabel .checkboxCustom {
+    background-color: #242EDB;
+    border-color: #242EDB;
+}
+
+.checkboxInput:checked + .checkboxLabel .checkboxCustom::after {
+    content: '✓';
+    color: #FFF;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.checkboxInput:focus + .checkboxLabel .checkboxCustom {
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.form button {
+    width: 100%;
+    margin: 0 auto;
+    padding: 12px 24px;
+    background-color: #242EDB;
+    color: #FFF;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.form button:hover {
+    background-color: #111672;
+}
+
+.or {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #999;
+}
+
+.or::before,
+.or::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background-color: #E0E0E0;
+    margin-top: 5px;
+}
+
+.newAcc {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight:lighter;
+}
+
+.newAcc p {
+    margin-right: 5px;
+    font-weight: 200;
+    color: #6C6C6C;
+}
+
+.newAcc a {
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid #242EDB;
+    color: #242EDB;
+}
+
+.newAcc a:hover {
+    border-bottom: 1px solid #111672;
+    color: #111672;
+    cursor: pointer;
+}
+
+/* Для ошибок */
+
+.fieldWrapper input.error {
+    border-color: #ff4444;
+    background-color: #fff5f5;
+}
+
+.errorMessage {
+    color: #ff4444;
+    font-size: 12px;
+    font-family: 'Inter', sans-serif;
+    margin-top: -4px;
+    margin-bottom: 8px;
+}
+
+.generalError {
+    color: #ff4444;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+    margin-bottom: 12px;
+    padding: 8px 12px;
+    background-color: #fff5f5;
+    border-radius: 6px;
+    border: 1px solid #ffcccc;
+}
+
+.form button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Текст смотриться некрасиво. Добавлено для адаптации */
+@media (max-width: 476px) {
+    .hello {
+      text-align: center;
+    }
+  
+    .bottomHello {
+      text-align: center;
+    }
+  
+    .general {
+      padding: 24px;
+    }
+}

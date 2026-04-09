@@ -1,0 +1,71 @@
+@font-face {
+    font-family: 'Inter';
+    src: url('../fonts/Inter_18pt-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+.general {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Inter', Roboto, sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.pagination {
+    color: #999;
+}
+
+.pagination .value {
+    color: #333;
+}
+
+.pages {
+    display: flex;
+    align-items: center;
+}
+
+.left, .right {
+    width: 30px;
+    height: 30px;
+    background-image: url("../images/left_pic.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 4px;
+}
+
+.left:hover, .right:hover {
+    background-color: #333;
+}
+
+.left {
+    background-image: url("../images/left_pic.svg");
+}
+
+.right {
+    background-image: url("../images/right_pic.svg");
+    margin-left: 8px;
+}
+
+.pageNumber, .pageNumberSelected {
+    width: 30px;
+    height: 30px;
+    margin-left: 8px;
+    border-radius: 4px;
+}
+
+.pageNumber {
+    color: #B2B3B9;
+    border: 1px solid #B2B3B9;
+}
+
+.pageNumber:hover {
+    background-color: #a0a3e9;
+}
+
+.pageNumberSelected {
+    color: #FFF;
+    background-color: #797FEA;
+}

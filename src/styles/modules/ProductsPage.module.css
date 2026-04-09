@@ -1,0 +1,74 @@
+.general {
+  max-width: 1920px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 54px 24px;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.headerName,
+.headerVendor,
+.headerArticle,
+.headerRating,
+.headerPrice {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
+  padding: 12px 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.headerRating,
+.headerPrice {
+  cursor: pointer;
+  transition: color 0.2s, background-color 0.2s;
+  border-radius: 4px;
+  user-select: none;
+}
+
+.headerRating:hover,
+.headerPrice:hover {
+  color: #242EDB;
+  background-color: #F5F5F5;
+}
+
+.headerRating.sorted,
+.headerPrice.sorted {
+  color: #242EDB;
+  font-weight: 600;
+  background-color: #EBF3EA;
+}
+
+.headerRating::after,
+.headerPrice::after {
+  margin-left: 4px;
+  font-size: 12px;
+  color: #999;
+}
+
+.headerRating.sorted::after,
+.headerPrice.sorted::after {
+  color: #242EDB;
+}
+
+.loadingWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  width: 100%;
+}
+
+.loadingText {
+  font-family: 'Inter', Roboto, sans-serif;
+  font-size: 16px;
+  color: #999;
+  margin-top: 16px;
+}

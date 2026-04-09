@@ -1,0 +1,28 @@
+.general {
+    display: grid;
+    grid-template-columns: 
+      minmax(280px, 2fr)
+      minmax(140px, 1.5fr)
+      minmax(120px, 1.2fr)
+      minmax(80px, 0.8fr)
+      minmax(100px, 1fr)
+      80px;
+    align-items: center;
+    width: 100%;
+    max-width: 1920px;
+    padding: 18px;
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-user-select: none;
+    padding: 18px;
+}
+
+.general span {
+    padding: 12px 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #666;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
