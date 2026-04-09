@@ -4,6 +4,7 @@ import SearchProduct from "../components/SearchProduct";
 import ProductsList from "../components/ProductsList";
 import ProductsCount from "../components/ProductsCount";
 import Toast from "../components/Toast";
+import ProgressBar from "../components/ProgressBar";
 import { useAuth } from "../hooks/useAuth";
 import { useProducts } from "../hooks/useProducts";
 import { useSearch } from "../hooks/useSearch";
@@ -39,6 +40,36 @@ const ProductsPage = () => {
     message: string;
     type: "success" | "error";
   } | null>(null);
+
+  // Для тестирования прогресс-бара
+  // Прогресс загрузки (для прогресс-бара)
+  // const [loadProgress, setLoadProgress] = useState(0);
+  // Флаг: показываем ли прогресс-бар (даже если загрузка уже завершилась)
+  // const [showProgress, setShowProgress] = useState(false);
+
+  // Симуляция прогресса загрузки
+  // useEffect(() => {
+  //   if (loading) {
+  //     setShowProgress(true);
+  //     setLoadProgress(10);
+
+  //     const interval = setInterval(() => {
+  //       setLoadProgress((prev) => {
+  //         const next = prev + Math.random() * 10;
+  //         return next >= 90 ? 90 : next;
+  //       });
+  //     }, 300);
+
+  //     return () => clearInterval(interval);
+  //   } else {
+  //     setLoadProgress(100);
+  //     const timer = setTimeout(() => {
+  //       setShowProgress(false);
+  //     }, 500);
+
+  //     return () => clearTimeout(timer);
+  //   }
+  // }, [loading]);
 
   // Фильтрация по поиску - пересчитывается только при изменении зависимостей
   const filteredProducts = useMemo(() => {
@@ -92,13 +123,21 @@ const ProductsPage = () => {
     setSearchTerm(term);
   };
 
-  // Показываем заглушку пока идёт проверка авторизации ИЛИ загрузка товаров
-  if (isChecking || (loading && products.length === 0)) {
+  // Загрлушка/прогресс-бар пока идёт проверка авторизации ИЛИ загрузка товаров
+  if (
+    isChecking ||
+    (loading && products.length === 0)
+    // ||
+    // (showProgress && products.length === 0)
+  ) {
     return (
       <div className={styles.general}>
         <SearchProduct searchTerm="" onSearchChange={() => {}} />
         <AddProduct onAdd={handleAddProduct} onRefresh={handleRefresh} />
-        <div className={styles.loading}>Загрузка...</div>
+
+        <div className={styles.loadingWrapper}>
+          <ProgressBar progress={loading ? 50 : 100} label="Загрузка товаров" />
+        </div>
       </div>
     );
   }
