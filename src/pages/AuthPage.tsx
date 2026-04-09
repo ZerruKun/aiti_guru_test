@@ -1,3 +1,12 @@
+// В ТЗ не было ничего про "выход", поэтому не реализовано, но если бы
+// было нужно, то кнопка условно логика была бы примерно такой:
+// const logout = () => {
+//   localStorage.removeItem("token");
+//   localStorage.removeItem("user");
+//   sessionStorage.removeItem("token");
+//   sessionStorage.removeItem("user");
+//   setUser(null);
+// };
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../styles/modules/AuthPage.module.css";
